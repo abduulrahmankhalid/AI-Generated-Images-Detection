@@ -1,4 +1,5 @@
 # AI-Generated Image Detection System
+>This Repository is Part of the AWS Machine Learning Engineer Track on The Digital Egpyt Pioneers Initiative (DEPI) Batch 2 - April 2025
 
 ## 📖 Project Report
 
