@@ -98,7 +98,7 @@ Our Kaggle competition score places us in the **Top 75 teams** from more than 55
 
 ## 📊 Summary
 
-This project delivers a full-stack AI solution capable of classifying AI-generated vs. human-created images with high accuracy. From preprocessing and model design to containerized deployment on AWS, every layer was optimized for reliability, fairness, and scalability. The use of a custom bias-penalizing loss function and CI/CD with GitHub Actions makes the system both intelligent and production-ready.
+This project presents an end-to-end solution to classify AI-generated vs. human-created images using state-of-the-art deep learning models. Our pipeline includes robust data preprocessing and augmentation, training with a custom loss function that addresses model bias, and deployment using AWS services with containerized applications orchestrated via Docker Compose and updated via GitHub Actions.
 
 > 🏆 Our competitive Kaggle score, which ranks us in the top 75 of over 550 teams, demonstrates the robustness and real-world applicability of our approach.
 
