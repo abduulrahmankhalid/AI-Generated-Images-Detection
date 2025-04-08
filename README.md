@@ -45,7 +45,7 @@ With the rise of AI-generated media, distinguishing between **Human-Created and 
   Images are resized to resolutions like 224 or 384 and normalized using pretrained model-specific functions. Additional resizing (e.g., to 256 or 400) was tested during augmentation tuning. The augmentation pipeline uses Keras layers to apply transformations such as random cropping, flipping, rotation, translation, zoom, subtle blurring, and brightness shifts.
 
 - **Data Splitting**:\
-  The dataset is split into **90% training** and **10% validation**, with the Kaggle competition test set used for final testing.
+  The dataset is split into **90% training** (*about 72,000 Images*) and **10% validation** (*about 8,000 Images*), with the Kaggle competition test set (*about 5500 Images*) used for final testing.
 
 ### 2️⃣ Model Development & Training
 
