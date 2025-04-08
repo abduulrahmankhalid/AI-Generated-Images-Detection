@@ -36,7 +36,7 @@ With the rise of AI-generated media, distinguishing between **Human-Created and 
 
 ## 🔬 Methodology
 
-### 1. Data Collection & Preprocessing
+### 1️⃣ Data Collection & Preprocessing
 
 - **Dataset**:\
   The dataset is sourced from the [AI-Generated vs. Human-Created Images Competition Dataset](https://www.kaggle.com/competitions/detect-ai-vs-human-generated-images).
@@ -47,7 +47,7 @@ With the rise of AI-generated media, distinguishing between **Human-Created and 
 - **Data Splitting**:\
   The dataset is split into **90% training** and **10% validation**, with the Kaggle competition test set used for final testing.
 
-### 2. Model Development & Training
+### 2️⃣ Model Development & Training
 
 We experimented with multiple high-performing models:
 
@@ -78,7 +78,7 @@ Our Kaggle competition score places us in the **Top 75 teams** from more than 55
 - **Evaluation Metrics**: Accuracy and F1-score
 - **Training Duration**: 3–5 epochs
 
-### 3. Web Backend & Deployment
+### 3️⃣ Web Backend & Deployment
 
 - **Frontend**:\
   Developed using HTML, CSS, and JavaScript to create a clean, user-friendly interface.
