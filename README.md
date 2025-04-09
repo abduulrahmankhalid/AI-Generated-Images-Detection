@@ -92,7 +92,7 @@ Our Kaggle competition score places us in the **Top 75 teams** from more than 55
   - **AWS S3**: Stores trained model files.
   - **AWS ECR**: Hosts container images.
   - **AWS EC2**: Pulls and runs the latest containers and models from ECR and S3.
-  - **GitHub Actions**: Automates building and pushing of containers to ECR, and triggers container updates on EC2.
+  - **GitHub Actions**: Automates building and pushing of containers to ECR, triggerning container updates on EC2.
 
 ---
 
