@@ -107,7 +107,8 @@ While **ConvNeXtTiny** achieved the highest performance, **EfficientNetV2B2** wa
 
   > Comparing Models Accuracy and Infrence Time:
 
-   > ![Models_Comparison_Size_Infrence](https://github.com/user-attachments/assets/8fb1c352-bb9b-4cd5-8205-c5a1a2215f2e)
+   > ![Models_Comparison_Size_Infrence](https://github.com/user-attachments/assets/13a612be-41c6-4c8e-a3d8-bc1b07737000)
+
 
 
 *Our Kaggle competition score places us in the **Top 75 teams** from more than 550 teams, confirming the robustness of our approach and pipeline.*
