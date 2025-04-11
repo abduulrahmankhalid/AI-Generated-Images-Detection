@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  ai-images-detection-app:
+    env_file: .env
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: public.ecr.aws/${ECR_ALIAS}/ai-images-detection-app:latest
+    container_name: ai-images-detection-app
+    ports:
+      - "80:8000"
+    restart: always
+    environment:
+      - MODEL_S3_BUCKET=${MODEL_S3_BUCKET}
+      - MODEL_S3_KEY=${MODEL_S3_KEY}
+      - MODEL_PATH=/app/models/model.onnx
+      - AWS_DEFAULT_REGION=${AWS_REGION}
+    deploy:
+      resources:
+        limits:
+          memory: 700M

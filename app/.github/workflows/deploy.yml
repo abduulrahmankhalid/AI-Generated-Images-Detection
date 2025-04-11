@@ -1,0 +1,49 @@
+name: Deploy to AWS  # Display name in GitHub Actions UI
+
+on:  # Trigger conditions
+  push:
+    branches: [main]  # Only run when pushing to main branch
+  workflow_dispatch:  # Also allows manual triggering from GitHub UI
+
+jobs:
+  deploy:  # Job name
+    runs-on: ubuntu-latest  # VM environment for running actions
+    steps:
+      - name: Checkout code  # Step name
+        uses: actions/checkout@v3  # Action that clones your repository
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}  # Using GitHub secret
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}  # Using GitHub secret
+          aws-region: ${{ secrets.AWS_REGION }}  # Using GitHub secret
+
+      # Login to Amazon ECR Public
+      - name: Login to Amazon ECR Public
+        id: login-ecr-public
+        run: |
+          aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
+          echo "registry=public.ecr.aws/${{ secrets.ECR_ALIAS }}" >> $GITHUB_OUTPUT
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .  # Build context is repository root
+          push: true  # Actually push the image to ECR
+          tags: ${{ steps.login-ecr-public.outputs.registry }}/ai-images-detection-app:latest  # Image naming
+
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ec2-user  # Default user for Amazon Linux
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd ~/ai-images-detection-app
+            echo "AWS_ACCOUNT_ID=${{ secrets.AWS_ACCOUNT_ID }}" > .env
+            echo "AWS_REGION=${{ secrets.AWS_REGION }}" >> .env
+            aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
+            docker-compose pull
+            docker-compose down
+            docker-compose up -d

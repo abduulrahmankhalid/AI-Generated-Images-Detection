@@ -1,0 +1,33 @@
+# Git files
+.git
+.gitignore
+.github
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+
+# Development files
+.idea/
+.vscode/
+*.log
+.DS_Store
+
+# Large model files (will download from S3)
+models/*.h5
+models/*.pb
+models/*.tflite
+models/*.onnx
+
+# Local docker files
+docker-compose.override.yml
+
+# Documentation
+README.md
+*.md

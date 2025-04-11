@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Image Detection</title>
+    <!-- Consolidated favicon links -->
+    <link rel="icon" type="image/png" sizes="256x256" href="static/images/favicon.png">
+    <link rel="apple-touch-icon" sizes="256x256" href="static/images/favicon.png">
+    <meta name="theme-color" content="#3a6df0">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Neural background effect -->
+    <div class="neural-background"></div>
+    
+    <!-- Navigation Bar -->
+    <header>
+        <div class="container">
+            <div class="logo">Can You Spot the Fake? Let AI Decide!</div>
+            <nav class="nav-links">
+                <a href="#home"><i class="fas fa-home"></i> Home</a>
+                <a href="#how-it-works"><i class="fas fa-cogs"></i> How It Works</a>
+                <a href="#about"><i class="fas fa-info-circle"></i> About</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="home-section">
+            <div class="container">
+                <div class="home-content">
+                    <h1>AI-Generated Images Detection</h1>
+                    <p>Upload images to detect AI-generated images with cutting-edge computer vision technologies.</p>
+                    
+                    <!-- Upload area -->
+                    <div class="upload-area" id="upload-area">
+                        <div class="upload-icon">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <p>Drag and drop your image here or click to upload</p>
+                        <input type="file" id="file-input" accept="image/*" style="display: none;">
+                    </div>
+                    
+                    <button id="predict-button" class="primary-button" disabled>Analyze Image</button>
+                    
+                    <!-- Results area -->
+                    <div id="prediction-result" class="hidden-result"></div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="action-buttons hidden" id="result-actions">
+                        <button id="save-result" class="secondary-button">
+                            <i class="fas fa-save"></i> Save Result
+                        </button>
+                        <button id="download-result" class="secondary-button">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                        <button id="share-result" class="secondary-button">
+                            <i class="fas fa-share-alt"></i> Share
+                        </button>
+                    </div>
+                </div>
+                <div class="home-image">
+                    <img src="static/images/homee.jpeg" alt="AI Detection" id="home-preview-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- History Section -->
+        <section id="history-section" class="history-section hidden">
+            <div class="container">
+                <div class="history-header">
+                    <h2>Prediction History</h2>
+                    <button id="clear-history" class="text-button">Clear All</button>
+                </div>
+                <div id="history-container"></div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section id="how-it-works" class="how-it-works-section">
+            <div class="container">
+                <div class="how-it-works-image">
+                    <img src="static/images/works.jpeg" alt="How It Works">
+                </div>
+                <div class="how-it-works-content">
+                    <h2>How It Works</h2>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-content">
+                                <div class="step-icon">
+                                    <i class="fas fa-upload"></i>
+                                </div>
+                                <div class="step-text">
+                                    <h3>Upload Your Image</h3>
+                                    <p>Drop or select any JPG, JPEG, or PNG file (up to 10MB).</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-content">
+                                <div class="step-icon">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <div class="step-text">
+                                    <h3>AI Analysis</h3>
+                                    <p>Our deep learning model examines pixel patterns and visual artifacts invisible to human eye, providing fast and accurate analysis results.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-content">
+                                <div class="step-icon">
+                                    <i class="fas fa-chart-bar"></i>
+                                </div>
+                                <div class="step-text">
+                                    <h3>Instant Results</h3>
+                                    <p>View if your image is AI-Generated or Human-Created with confidence score. Save, download or share results from your prediction history.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <div class="container">
+                <div class="about-content">
+                    <h2>About</h2>
+                    <div class="about-paragraphs">
+                        <div class="about-item">
+                            <div class="step-content">
+                                <div class="step-icon">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <div class="step-text">
+                                    <h3>The Technology</h3>
+                                    <p>Our AI detection tool uses advanced deep learning algorithms to analyze pixel patterns and visual artifacts that are typically invisible to the human eye. By training on thousands of AI-Generated and Human-Created images, our model can identify subtle inconsistencies that reveal an image's true origin.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="about-item">
+                            <div class="step-content">
+                                <div class="step-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div class="step-text">
+                                    <h3>Why It Matters</h3>
+                                    <p>As AI-generated images become increasingly realistic and widespread, the ability to distinguish between authentic and synthetic content is crucial. Our tool helps combat misinformation, protect digital authenticity, and maintain trust in visual media during a time when the line between real and artificial is rapidly blurring.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="static/images/about.jpeg" alt="About AI Detection">
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">
+                <img src="static/images/favicon.png" alt="Site Logo" width="32" height="32">
+                <p>© 2025 AI-Generated Images Detection</p>
+            </div>
+            <div class="footer-links">
+                <a href="https://github.com/abduulrahmankhalid/AI-Generated-Images-Detection" target="_blank">
+                    <i class="fab fa-github"></i> GitHub Repository
+                </a>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="static/script.js"></script>
+    <script>
+      // Create animated scanning lines
+      function createScanLines() {
+        // Remove old lines
+        document.querySelectorAll('.scan-line').forEach(line => line.remove());
+        
+        // Create new lines
+        for (let i = 0; i < 3; i++) {
+          const scanLine = document.createElement('div');
+          scanLine.className = 'scan-line';
+        scanLine.style.animationDelay = `${i * 2.5}s`;
+          document.body.appendChild(scanLine);
+        }
+        
+        // Recreate lines periodically to prevent any issues
+        setTimeout(createScanLines, 8000);
+      }
+      
+      // Initialize scan lines
+      document.addEventListener('DOMContentLoaded', createScanLines);
+    </script>
+</body>
+</html>
