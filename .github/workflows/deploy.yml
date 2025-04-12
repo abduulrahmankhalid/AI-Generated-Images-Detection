@@ -40,9 +40,17 @@ jobs:
           username: ec2-user  # Default user for Amazon Linux
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd ~/ai-images-detection-app
-            echo "AWS_ACCOUNT_ID=${{ secrets.AWS_ACCOUNT_ID }}" > .env
-            echo "AWS_REGION=${{ secrets.AWS_REGION }}" >> .env
+            cd ~/ai-images-detection-app  
+            if [ -f config.persistent ]; then
+              cp config.persistent .env
+            else
+              echo "AWS_ACCOUNT_ID=${{ secrets.AWS_ACCOUNT_ID }}" > .env
+              echo "ECR_ALIAS=${{ secrets.ECR_REGISTRY_ALIAS }}" > .env
+              echo "MODEL_S3_BUCKET=${{ secrets.MODEL_S3_BUCKET }}" >> .env
+              echo "MODEL_S3_KEY=${{ secrets.MODEL_S3_KEY }}" >> .env
+              echo "MODEL_PATH=${{ secrets.MODEL_PATH }}" >> .env
+              echo "AWS_DEFAULT_REGION=${{ secrets.AWS_REGION }}" >> .env
+            fi
             aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
             docker-compose pull
             docker-compose down
