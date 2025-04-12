@@ -116,10 +116,30 @@ While **ConvNeXtTiny** achieved the highest performance, **EfficientNetV2B2** wa
 **Training Configuration**:
 
 - **Optimizer**: AdamW
-- **Loss Function**: Custom loss combining binary cross-entropy and an MSE fairness penalty.
-  - **Explanation**: The MSE penalty enforces alignment with a target class distribution by penalizing deviation from a predefined ratio of AI-generated predictions, thereby mitigating bias and encouraging balanced predictions.
-- **Evaluation Metrics**: Accuracy and F1-score
 - **Training Duration**: 3–5 epochs
+- **Loss Function**: Custom loss to address models bias towards a particular class in training.
+  - **Explanation**: we used a Custom loss combining binary cross-entropy and an MSE fairness penalty which enforces alignment with a target class distribution by penalizing deviation from a predefined ratio of AI-generated predictions, thereby mitigating bias and encouraging balanced predictions.
+    - **$Loss_1$** : Standard cross-entropy loss for training sample predictions.
+    - **$Loss_2$** : Mean squared error (MSE) loss to enforce a target ratio $\beta$ of predicted class 1 (AI-generated) to class 0 (human-created) samples in the test set.
+    
+        > $$\text{MSE} = (\text{mean}(y_{\text{pred}}) - \beta)^2$$
+
+    - The total loss is computed as:
+        > $$\text{Total Loss} = \text{Loss}_1 + \alpha \times \text{Loss}_2$$
+      
+      where:
+       - $\alpha$ is a hyperparameter controlling the weight of the fairness constraint.
+       - $\beta$ is the target proportion of AI-generated images in predictions.
+
+- **Evaluation Metrics**: Accuracy and F1-score
+    > EfficientNetV2B2 Metrics:
+      >![metrics](https://github.com/user-attachments/assets/b135f54c-a50a-4596-81bb-c8d7c497f2ae)
+ 
+
+**Inference Configuration**:
+- **ONNX Conversion**: The best model was converted to ONNX format for optimized deployment and faster inference.
+- **Model Size Optimization**: The model was resized and optimized, reducing its file size to 35 MB.
+- **Deployment-Ready**: These adjustments ensure efficient resource usage and faster execution in production environments.
 - **Visualizing Some Models Prediction (from validation-set):**
 
   >![Visualizing-Predictions](https://github.com/user-attachments/assets/43d7972c-e6ba-4467-869e-7ae8ca65265e)
@@ -129,6 +149,14 @@ While **ConvNeXtTiny** achieved the highest performance, **EfficientNetV2B2** wa
 
 - **Frontend**:\
   Developed using HTML, CSS, and JavaScript, the interface is clean, interactive, and user-friendly. Users can download the prediction for their images with the predicted class and confidence printed on it for their records. It also offers a dedicated history section where users can view all their past predictions they saved.
+  >![Screenshot 2025-04-11 222207](https://github.com/user-attachments/assets/777f1510-e407-4467-bc19-e49cd819fe17)
+  
+  >![image](https://github.com/user-attachments/assets/c5e8eea4-40fd-4e78-bf42-4ff7d1333156)
+
+  
+  >![History](https://github.com/user-attachments/assets/7f4e024b-e753-4c2f-99ac-c8a931691c03)
+
+
 
 - **Backend**:\
   Powered by FastAPI, the backend handles all image-upload routes and prediction requests efficiently. It performs all required image preprocessing and model inference, and includes comprehensive error handling to ensure reliable operation in production. Additionally, it integrates with other AWS services for model storage and containerized deployment.
