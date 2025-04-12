@@ -3,6 +3,7 @@
 > This Repository is Part of the AWS Machine Learning Engineer Track on The Digital Egypt Pioneers Initiative (DEPI) Batch 2 - April 2025
 
 ## 📖 Project Report
+### **The System is live and accessible: [![Try the app](https://img.shields.io/badge/Try_the_Live_App-blue?style=for-the-badge)](http://ai-images-detection.tech/)**
 
 ### 📌 Introduction
 
@@ -12,9 +13,14 @@ With the rise of AI-generated media, distinguishing between **Human-Created and 
 
 ## 🎯 Objectives
 
+- **Data Pipeline and Augmentation**
+
+  - Preprocess images at multiple resolutions (e.g., 224, 384).
+  - Apply robust augmentation strategies like resizing, cropping, flipping, rotation, zooming, shearing, and brightness-coloring adjustments to generalize the model.
+
 - **Model Development**
 
-  - Develop and compare state-of-the-art deep learning models for image classification including variants from the **EfficientNetV2** and **ConvNeXt** families.
+  - Develop and compare state-of-the-art deep learning models for image classification including variants from the **EfficientNetV2** and **ConvNeXt** families. and deploy the best trade-off between accuracy and inference cost.
   - Evaluate the models using a custom loss function that blends binary cross-entropy with a fairness-oriented MSE penalty to reduce bias and enforce a target prediction ratio.
 
 - **Web Backend & Deployment**
@@ -23,14 +29,6 @@ With the rise of AI-generated media, distinguishing between **Human-Created and 
   - Use **Docker and Docker Compose** to containerize the entire application.
   - Store models on **AWS S3**, push containers to **AWS ECR**, and run them on **AWS EC2**.
   - Automate deployments using **GitHub Actions** for CI/CD.
-
-- **Data Pipeline and Augmentation**
-
-  - Preprocess images at multiple resolutions (e.g., 224, 384).
-  - Apply robust augmentation strategies like resizing, cropping, flipping, rotation, zooming, shearing, and brightness-coloring adjustments to generalize the model.
-
-- **Training and Model Selection**
-  - Evaluate and compare several high-performance models, and deploy the best trade-off between accuracy and inference cost.
 
 ---
 
@@ -50,7 +48,7 @@ With the rise of AI-generated media, distinguishing between **Human-Created and 
     >  ![Human-Images-Samples](https://github.com/user-attachments/assets/7fcbf796-4290-4dad-911a-dc07e84e9c14)
 
 - **Preprocessing & Augmentation**:
-  Images are resized to resolutions like 224 or 384 and normalized using pretrained model-specific functions. Additional resizing (e.g., to 256 or 400) was tested during augmentation tuning. The augmentation pipeline uses Keras layers to apply transformations such as random cropping, flipping, rotation, translation, zoom, subtle blurring, and brightness-colors shifts.
+  Images are resized to resolutions like 224 or 384 and normalized using pretrained model-specific functions. Additional resizing (e.g., to 256 or 400) was tested during augmentation tuning. The augmentation pipeline uses Keras layers to apply transformations such as random cropping, flipping, rotation, translation, zoom, subtle blurring, sharpness and brightness-colors shifts.
   
 
   >AI-Generated Augmented Images Samples:
@@ -151,12 +149,9 @@ While **ConvNeXtTiny** achieved the highest performance, **EfficientNetV2B2** wa
   Developed using HTML, CSS, and JavaScript, the interface is clean, interactive, and user-friendly. Users can download the prediction for their images with the predicted class and confidence printed on it for their records. It also offers a dedicated history section where users can view all their past predictions they saved.
   >![Screenshot 2025-04-11 222207](https://github.com/user-attachments/assets/777f1510-e407-4467-bc19-e49cd819fe17)
   
-  >![image](https://github.com/user-attachments/assets/c5e8eea4-40fd-4e78-bf42-4ff7d1333156)
+  >![image](https://github.com/user-attachments/assets/7cac5c5f-a1a6-4cec-beee-213057a6b290)
 
-  
-  >![History](https://github.com/user-attachments/assets/7f4e024b-e753-4c2f-99ac-c8a931691c03)
-
-
+  >![image](https://github.com/user-attachments/assets/d44eb1e2-27e4-4603-a688-567c77933477)
 
 - **Backend**:\
   Powered by FastAPI, the backend handles all image-upload routes and prediction requests efficiently. It performs all required image preprocessing and model inference, and includes comprehensive error handling to ensure reliable operation in production. Additionally, it integrates with other AWS services for model storage and containerized deployment.
@@ -173,11 +168,13 @@ While **ConvNeXtTiny** achieved the highest performance, **EfficientNetV2B2** wa
 - **System Architecture Design**:
   
     > ![System Design](https://github.com/user-attachments/assets/e2ca7e58-e6e6-4333-a970-077b6407c2d2)
+
+### **The System is always live and accessible here: [![EC2 Adress](https://img.shields.io/badge/AI_Images_Detection-yellow?style=plastic)](http://34.226.138.134/)**
 ---
 
 ## 📊 Summary
 
-This project presents an end-to-end solution to classify AI-generated vs. human-created images using state-of-the-art deep learning models. Our pipeline includes robust data preprocessing and augmentation, training with a custom loss function that addresses model bias, and deployment using AWS services with containerized applications orchestrated via Docker Compose and updated via GitHub Actions.
+This project presents an end-to-end full stack AI solution to classify AI-generated vs. human-created images using state-of-the-art deep learning models. Our pipeline includes robust data preprocessing and augmentation, training with a custom loss function that addresses model bias, and deployment using AWS services with containerized applications orchestrated via Docker Compose and updated via GitHub Actions.
 
 > 🏆 "Our placement in the top 75 of more than 550 teams in Kaggle demonstrates that our approach is both robust and applicable in practical settings.
 
