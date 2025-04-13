@@ -3,7 +3,7 @@
 > This Repository is Part of the AWS Machine Learning Engineer Track on The Digital Egypt Pioneers Initiative (DEPI) Batch 2 - April 2025
 
 ## 📖 Project Report
-### **The System is live and accessible here: [![Try the app](https://img.shields.io/badge/Try_the_Live_App-blue?style=for-the-badge)](http://ai-images-detection.tech/)**
+### **[The System is live and accessible here:](http://ai-images-detection.tech/) [![Try the app](https://img.shields.io/badge/Try_the_Live_App-blue?style=for-the-badge)](http://ai-images-detection.tech/)**
 
 ### 📌 Introduction
 
@@ -170,7 +170,7 @@ While **ConvNeXtTiny** achieved the highest performance, **EfficientNetV2B2** wa
   
     > ![System Design](https://github.com/user-attachments/assets/e2ca7e58-e6e6-4333-a970-077b6407c2d2)
 
-### **The System is always live and accessible here: [![EC2 Adress](https://img.shields.io/badge/AI_Images_Detection-yellow?style=plastic)](http://34.226.138.134/)**
+### **[The System is always live and accessible here:](http://34.226.138.134/) [![EC2 Adress](https://img.shields.io/badge/AI_Images_Detection-yellow?style=plastic)](http://34.226.138.134/)**
 ---
 
 ## 📊 Summary
