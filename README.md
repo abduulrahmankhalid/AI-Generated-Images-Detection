@@ -3,7 +3,7 @@
 > This Repository is Part of the AWS Machine Learning Engineer Track on The Digital Egypt Pioneers Initiative (DEPI) Batch 2 - April 2025
 
 ## 📖 Project Report
-### **The System is live and accessible: [![Try the app](https://img.shields.io/badge/Try_the_Live_App-blue?style=for-the-badge)](http://ai-images-detection.tech/)**
+### **The System is live and accessible here: [![Try the app](https://img.shields.io/badge/Try_the_Live_App-blue?style=for-the-badge)](http://ai-images-detection.tech/)**
 
 ### 📌 Introduction
 
@@ -20,8 +20,9 @@ With the rise of AI-generated media, distinguishing between **Human-Created and 
 
 - **Model Development**
 
-  - Develop and compare state-of-the-art deep learning models for image classification including variants from the **EfficientNetV2** and **ConvNeXt** families. and deploy the best trade-off between accuracy and inference cost.
+  - Develop and compare state-of-the-art deep learning models for image classification, including variants from the **EfficientNetV2** and **ConvNeXt** families, deploy the best trade-off between accuracy and inference cost.
   - Evaluate the models using a custom loss function that blends binary cross-entropy with a fairness-oriented MSE penalty to reduce bias and enforce a target prediction ratio.
+  - Converting the best-performing model to ONNX format for optimized deployment and faster inference in a production environment.
 
 - **Web Backend & Deployment**
 
@@ -37,7 +38,7 @@ With the rise of AI-generated media, distinguishing between **Human-Created and 
 ### 1️⃣ Data Collection & Preprocessing
 
 - **Dataset**:
-  The dataset is sourced from the [AI-Generated vs. Human-Created Images Competition](https://www.kaggle.com/competitions/detect-ai-vs-human-generated-images). The dataset for this Competition is provided by Shutterstock and DeepMedia, combines authentic and AI-generated images to create a robust foundation for training and evaluation.
+  The dataset is sourced from the [AI-Generated vs. Human-Created Images Competition](https://www.kaggle.com/competitions/detect-ai-vs-human-generated-images). The dataset for this Competition is provided by Shutterstock and DeepMedia, which combines authentic and AI-generated images to create a robust foundation for training and evaluation.
 
   > AI-Generated  Images Samples:
   
@@ -103,7 +104,7 @@ While **ConvNeXtTiny** achieved the highest performance, **EfficientNetV2B2** wa
 
    > ![Models_Comparison_Accuracy_Scores](https://github.com/user-attachments/assets/f9e7460b-7e51-4fcd-b9fb-bf5ee7ca8b8c)
 
-  > Comparing Models Accuracy and Infrence Time:
+  > Comparing Models Accuracy and Inference Time:
 
    > ![Models_Comparison_Size_Infrence](https://github.com/user-attachments/assets/13a612be-41c6-4c8e-a3d8-bc1b07737000)
 
@@ -116,9 +117,9 @@ While **ConvNeXtTiny** achieved the highest performance, **EfficientNetV2B2** wa
 - **Optimizer**: AdamW
 - **Training Duration**: 3–5 epochs
 - **Loss Function**: Custom loss to address models bias towards a particular class in training.
-  - **Explanation**: we used a Custom loss combining binary cross-entropy and an MSE fairness penalty which enforces alignment with a target class distribution by penalizing deviation from a predefined ratio of AI-generated predictions, thereby mitigating bias and encouraging balanced predictions.
-    - **$Loss_1$** : Standard cross-entropy loss for training sample predictions.
-    - **$Loss_2$** : Mean squared error (MSE) loss to enforce a target ratio $\beta$ of predicted class 1 (AI-generated) to class 0 (human-created) samples in the test set.
+  - **Explanation**: We used a Custom loss combining binary cross-entropy and an MSE fairness penalty, which enforces alignment with a target class distribution by penalizing deviation from a predefined ratio of AI-generated predictions, thereby mitigating bias and encouraging balanced predictions.
+    - **$Loss_1$**: Standard cross-entropy loss for training sample predictions.
+    - **$Loss_2$**: Mean squared error (MSE) loss to enforce a target ratio $\beta$ of predicted class 1 (AI-generated) to class 0 (human-created) samples in the test set.
     
         > $$\text{MSE} = (\text{mean}(y_{\text{pred}}) - \beta)^2$$
 
@@ -174,7 +175,7 @@ While **ConvNeXtTiny** achieved the highest performance, **EfficientNetV2B2** wa
 
 ## 📊 Summary
 
-This project presents an end-to-end full stack AI solution to classify AI-generated vs. human-created images using state-of-the-art deep learning models. Our pipeline includes robust data preprocessing and augmentation, training with a custom loss function that addresses model bias, and deployment using AWS services with containerized applications orchestrated via Docker Compose and updated via GitHub Actions.
+This project presents an end-to-end full-stack AI solution to classify AI-generated vs. human-created images using state-of-the-art deep learning models. Our pipeline includes robust data preprocessing and augmentation, training with a custom loss function that addresses model bias, and deployment using AWS services with containerized applications orchestrated via Docker Compose and updated via GitHub Actions.
 
 > 🏆 "Our placement in the top 75 of more than 550 teams in Kaggle demonstrates that our approach is both robust and applicable in practical settings.
 
