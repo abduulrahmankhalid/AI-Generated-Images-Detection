@@ -1,3 +1,4 @@
+/* filepath: /c:/Users/abduu/OneDrive/Documents/DEPI/AWS ML Project/script.js */
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize UI elements
     const elements = {
@@ -301,19 +302,21 @@ document.addEventListener('DOMContentLoaded', function() {
      * Save, download and share handlers
      */
     function handleSaveResult() {
-        if (!state.currentPrediction) return;
-        
-        processImageWithResult(state.currentPrediction, (processedImageUrl) => {
-            // Save both original and processed images to history
+    if (!state.currentPrediction) return;
+    
+    // Reduce quality to save space
+    processImageWithResult(state.currentPrediction, (processedImageUrl) => {
+        try {
+            // Create the item to save
             const savedPrediction = {
                 imgData: processedImageUrl,
                 isAI: state.currentPrediction.isAI,
                 confidence: state.currentPrediction.confidence,
-                timestamp: state.currentPrediction.timestamp,
+                timestamp: new Date().toISOString(),
                 originalBlob: state.currentPrediction.file
             };
             
-            // Update history
+            // Add to front of array
             state.savedItems.unshift(savedPrediction);
             
             // Keep only MAX_HISTORY_ITEMS
@@ -321,18 +324,44 @@ document.addEventListener('DOMContentLoaded', function() {
                 state.savedItems = state.savedItems.slice(0, state.MAX_HISTORY_ITEMS);
             }
             
-            // Save to localStorage (excluding blobs)
-            const storageItems = state.savedItems.map(item => {
-                const { originalBlob, ...storableItem } = item;
-                return storableItem;
-            });
-            localStorage.setItem('savedPredictions', JSON.stringify(storageItems));
+            // Save to localStorage with error handling
+            try {
+                // Remove blobs before storing
+                const storageItems = state.savedItems.map(item => {
+                    const { originalBlob, ...storableItem } = item;
+                    return storableItem;
+                });
+                
+                // Try to store with reduced quality if needed
+                localStorage.setItem('savedPredictions', JSON.stringify(storageItems));
+            } catch (storageError) {
+                console.error('Storage error:', storageError);
+                
+                // If storage fails, reduce history size
+                while (state.savedItems.length > 1) {
+                    state.savedItems.pop(); // Remove oldest items
+                    try {
+                        const reducedItems = state.savedItems.map(item => {
+                            const { originalBlob, ...storableItem } = item;
+                            return storableItem;
+                        });
+                        localStorage.setItem('savedPredictions', JSON.stringify(reducedItems));
+                        break; // Successfully stored
+                    } catch (e) {
+                        // Keep reducing
+                    }
+                }
+            }
             
             // Update UI
             updateHistoryUI();
             elements.historySection.classList.remove('hidden');
-        });
-    }
+        } catch (error) {
+            console.error('Error saving prediction:', error);
+            alert('Unable to save prediction to history. Your browser storage may be full.');
+        }
+    }, 'image/jpeg', 0.7); // Reduce quality to 70% to save space
+}
     
     function handleDownloadResult() {
         if (!state.currentPrediction) return;
@@ -380,23 +409,39 @@ document.addEventListener('DOMContentLoaded', function() {
     /**
      * Image processing
      */
-    function processImageWithResult(prediction, callback) {
+    function processImageWithResult(prediction, callback, format = 'image/jpeg', quality = 0.95) {
         const canvas = document.createElement('canvas');
         const img = new Image();
         
         img.onload = function() {
+            // Calculate max dimensions to reduce storage needs
+            const MAX_DIMENSION = 1200;
+            let width = img.width;
+            let height = img.height;
+            
+            // Scale down large images
+            if (width > MAX_DIMENSION || height > MAX_DIMENSION) {
+                if (width > height) {
+                    height = Math.round((height * MAX_DIMENSION) / width);
+                    width = MAX_DIMENSION;
+                } else {
+                    width = Math.round((width * MAX_DIMENSION) / height);
+                    height = MAX_DIMENSION;
+                }
+            }
+            
             // Set canvas dimensions
-            canvas.width = img.width;
-            canvas.height = img.height;
+            canvas.width = width;
+            canvas.height = height;
             
             const ctx = canvas.getContext('2d');
             
-            // Draw the image
-            ctx.drawImage(img, 0, 0);
+            // Draw the image with scaling
+            ctx.drawImage(img, 0, 0, width, height);
             
             // Calculate overlay dimensions
-            const overlayHeight = calculateResponsiveOverlayHeight(img.height);
-            const fontSize = calculateFontSize(overlayHeight, canvas.width);
+            const overlayHeight = calculateResponsiveOverlayHeight(height);
+            const fontSize = calculateFontSize(overlayHeight, width);
             const borderHeight = Math.max(3, Math.floor(overlayHeight * 0.08));
             
             // Draw overlay background
@@ -411,8 +456,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // Draw text
             drawOverlayText(ctx, prediction, canvas.width, canvas.height, overlayHeight, fontSize);
             
-            // Return processed image
-            const processedImageUrl = canvas.toDataURL('image/jpeg', 0.95);
+            // Return processed image with specified quality
+            const processedImageUrl = canvas.toDataURL(format, quality);
             callback(processedImageUrl);
         };
         
