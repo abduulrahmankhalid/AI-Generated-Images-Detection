@@ -175,6 +175,37 @@ While **ConvNeXtTiny** achieved the highest performance, **EfficientNetV2B2** wa
     > ![System Design](https://github.com/user-attachments/assets/e2ca7e58-e6e6-4333-a970-077b6407c2d2)
 
 ### **[The System is always live and accessible here:](http://34.226.138.134/) [![EC2 Adress](https://img.shields.io/badge/AI_Images_Detection-yellow?style=plastic)](http://34.226.138.134/)**
+
+---
+
+## 🔮 Future Work & Limitations
+
+### 🚧 Limitations
+
+- **Data & Domain Drift**:  
+  The model may underperform in production as generative models evolve rapidly, causing a **drift between the training data and newly generated images**.
+
+- **Static Model**:  
+  Without updates, the model risks becoming outdated, especially as image realism from AI tools continues to improve.
+
+- **Lack of Interpretability**:  
+  Currently, predictions are made as black-box outputs, with no real built-in explainability for users or developers.
+
+> Sample from wrong predictions:
+
+  >![image](https://github.com/user-attachments/assets/a67c2a36-b3fb-4205-bf46-12e6a4fcf059)
+ 
+### 🔄 Future Work
+
+- **Continuous Retraining**:  
+  Develop pipelines to frequently retrain the model with the latest AI-generated image data to keep pace with generative trends.
+
+- **User Feedback Loop**:  
+  Incorporate misclassified samples into the training set to enhance the system's robustness over time.
+
+- **Explainable AI Integration**:  
+  Add tools like Grad-CAM to help visualize model decisions and improve trust in predictions.
+
 ---
 
 ## 📌 Summary
