@@ -7,11 +7,11 @@
 
 ## 🔍 Introduction
 
-The line between real and AI-generated content is blurring fast. With tools like **DALL·E** and **Midjourney** now accessible to everyone, malicious use cases — from deepfake propaganda to fake historical imagery — are on the rise.
+- The line between real and AI-generated content is blurring fast. With tools like **DALL·E** and **Midjourney** now accessible to everyone, malicious use cases — from deepfake propaganda to fake historical - imagery — are on the rise.
 
-There’s a **critical need** for automated, scalable systems that can reliably detect such synthetic content. Manual verification doesn’t scale, and conventional tools fail to keep up with the realism of new AI models.
+- There’s a **critical need** for automated, scalable systems that can reliably detect such synthetic content. Manual verification doesn’t scale, and conventional tools fail to keep up with the realism of new AI models.
 
-In this project, we aim to respond to that need by **developing a robust AI-powered image detection system** that classifies content as either **AI-generated** or **human-created**.
+- In this project, we aim to respond to that need by **developing a robust AI-powered image detection system** that classifies content as either **AI-generated** or **human-created**.
 
 ---
 
