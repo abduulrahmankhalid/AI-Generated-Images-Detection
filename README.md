@@ -5,9 +5,13 @@
 ## 📖 Project Report
 ### **[The System is live and accessible here:](http://ai-images-detection.tech/) [![Try the app](https://img.shields.io/badge/Try_the_Live_App-blue?style=for-the-badge)](http://ai-images-detection.tech/)**
 
-### 📌 Introduction
+## 🔍 Introduction
 
-With the rise of AI-generated media, distinguishing between **Human-Created and AI-Generated images** has become a significant challenge. This project presents an **AI-based image detection system** that classifies images as either **AI-generated or Human-Created** using advanced computer vision deep learning techniques. The system is built using **Python, TensorFlow, and Keras**, and is deployed on a robust AWS infrastructure. The backend is built with **FastAPI**, and the application is fully containerized with **Docker and Docker Compose**.
+The line between real and AI-generated content is blurring fast. With tools like **DALL·E** and **Midjourney** now accessible to everyone, malicious use cases — from deepfake propaganda to fake historical imagery — are on the rise.
+
+There’s a **critical need** for automated, scalable systems that can reliably detect such synthetic content. Manual verification doesn’t scale, and conventional tools fail to keep up with the realism of new AI models.
+
+In this project, we aim to respond to that need by **developing a robust AI-powered image detection system** that classifies content as either **AI-generated** or **human-created**.
 
 ---
 
@@ -173,10 +177,10 @@ While **ConvNeXtTiny** achieved the highest performance, **EfficientNetV2B2** wa
 ### **[The System is always live and accessible here:](http://34.226.138.134/) [![EC2 Adress](https://img.shields.io/badge/AI_Images_Detection-yellow?style=plastic)](http://34.226.138.134/)**
 ---
 
-## 📊 Summary
+## 📌 Summary
 
 This project presents an end-to-end full-stack AI solution to classify AI-generated vs. human-created images using state-of-the-art deep learning models. Our pipeline includes robust data preprocessing and augmentation, training with a custom loss function that addresses model bias, and deployment using AWS services with containerized applications orchestrated via Docker Compose and updated via GitHub Actions.
 
-> 🏆 "Our placement in the top 75 of more than 550 teams in Kaggle demonstrates that our approach is both robust and applicable in practical settings.
+*🏆 Our placement in the top 75 of more than 550 teams in Kaggle demonstrates that our approach is both robust and applicable in practical settings.*
 
 ---
