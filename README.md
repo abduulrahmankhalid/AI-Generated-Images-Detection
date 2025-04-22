@@ -7,7 +7,7 @@
 
 ## 🔍 Introduction
 
-- The line between real and AI-generated content is blurring fast. With tools like **DALL·E** and **Midjourney** now accessible to everyone, malicious use cases — from deepfake propaganda to fake historical - imagery — are on the rise.
+- The line between real and AI-generated content is blurring fast. With tools like **DALL·E** and **Midjourney** now accessible to everyone, malicious use cases — from deepfake propaganda to fake historical imagery — are on the rise.
 
 - There’s a **critical need** for automated, scalable systems that can reliably detect such synthetic content. Manual verification doesn’t scale, and conventional tools fail to keep up with the realism of new AI models.
 
@@ -24,7 +24,7 @@
 
 - **Model Development**
 
-  - Develop and compare state-of-the-art deep learning models for image classification, including variants from the **EfficientNetV2** and **ConvNeXt** families, deploy the best trade-off between accuracy and inference cost.
+  - Develop and compare state-of-the-art deep learning models for image classification, including variants from the **EfficientNet** and **ConvNeXt** families, deploy the best trade-off between accuracy and inference cost.
   - Evaluate the models using a custom loss function that blends binary cross-entropy with a fairness-oriented MSE penalty to reduce bias and enforce a target prediction ratio.
   - Converting the best-performing model to ONNX format for optimized deployment and faster inference in a production environment.
 
@@ -53,7 +53,7 @@
     >  ![Human-Images-Samples](https://github.com/user-attachments/assets/7fcbf796-4290-4dad-911a-dc07e84e9c14)
 
 - **Preprocessing & Augmentation**:
-  Images are resized to resolutions like 224 or 384 and normalized using pretrained model-specific functions. Additional resizing (e.g., to 256 or 400) was tested during augmentation tuning. The augmentation pipeline uses Keras layers to apply transformations such as random cropping, flipping, rotation, translation, zoom, subtle blurring, sharpness and brightness-colors shifts.
+  Images are resized to resolutions like 224 or 384 and normalized using pretrained model-specific functions. The augmentation pipeline uses Keras layers to apply transformations such as random cropping, flipping, rotation, translation, zoom, subtle blurring, sharpness and brightness-colors shifts.
   
 
   >AI-Generated Augmented Images Samples:
@@ -69,7 +69,7 @@
 - **Data Splitting**:
 
   The dataset is split into **90% training** (*about 72,000 Images*) and **10% validation** (*about 8,000 Images*), with the Kaggle competition test set (*about 5500 Images*) used for final testing.
-  > Competition Test set Samples:
+  > Competition Test Set Samples:
   
     > ![Test-Images](https://github.com/user-attachments/assets/a9ddc0d6-b0b8-429b-bc3e-48361a232ccb)
   
@@ -77,50 +77,53 @@
 
 We experimented with multiple high-performing models:
 
-- **EfficientNetV2B2**
-
-  - Validation Score: 94%
-  - Kaggle Score: 73.5%
-  - Model Architecture:
-    
-      > ![EfficientNetV2B2_Model](https://github.com/user-attachments/assets/3afd4c26-7932-42b5-b4b3-71a6ef3f03d5)
-
-
 - **EfficientNetV2S**
 
-  - Validation Score: 96%
-  - Kaggle Score: 75.5%
+  - Validation Score: 98%
+  - Kaggle Score: 77.5%
   - Model Architecture:
+    - Native version from Keras Pre-trained models.
+      > ![EfficientNetV2S_Model](https://github.com/user-attachments/assets/02cd90e1-d745-4150-bf5d-07b0f72fde70)
 
-      > ![EfficientNetV2S_Model](https://github.com/user-attachments/assets/61c7f82a-61ff-4ae9-81bb-16fbbdd7215f)
 
 - **ConvNeXtTiny**
 
-  - Validation Score: 97%
-  - Kaggle Score: 76.5%
+  - Validation Score: 99%
+  - Kaggle Score: 79%
   - Model Architecture:
-    
-      >![ConvNeXt_Model](https://github.com/user-attachments/assets/2c9abea7-0986-4613-a4b2-4c2e4c7c8bed)
-
-While **ConvNeXtTiny** achieved the highest performance, **EfficientNetV2B2** was ultimately chosen for deployment due to its smaller size and faster inference—an essential trade-off for scalable, cloud-based deployment.
-
-  > Comparing Models Accuracy and Scores:
-
-   > ![Models_Comparison_Accuracy_Scores](https://github.com/user-attachments/assets/f9e7460b-7e51-4fcd-b9fb-bf5ee7ca8b8c)
-
-  > Comparing Models Accuracy and Inference Time:
-
-   > ![Models_Comparison_Size_Infrence](https://github.com/user-attachments/assets/13a612be-41c6-4c8e-a3d8-bc1b07737000)
+    - Native version from Keras Pre-trained models.
+      > ![ConvNeXt_Model](https://github.com/user-attachments/assets/80583a04-04d6-466b-a858-cec70b542c75)
 
 
+- **EfficientNetB5-Swin**
 
-*Our Kaggle competition score places us in the **Top 75 teams** from more than 550 teams, confirming the robustness of our approach and pipeline.*
+  - Validation Score: 99%
+  - Kaggle Score: 81%
+  - Model Architecture:
+    - Keras Hub EfficientNet B5 model pre-trained on the ImageNet 12k dataset and fine-tuned on ImageNet-1k by Ross Wightman. Based on Swin Transformer train / pretrain recipe with modifications (related to both DeiT and ConvNeXt recipes).
+      >![EfficientNetB5Swin_Model](https://github.com/user-attachments/assets/8f6450f5-f847-4170-a4ca-9d91743258ec)
+
+
+**EfficientNetB5-Swin** was ultimately chosen for deployment due to its superior performance and efficient trade-off between accuracy, size, and inference speed—an essential trade-off for scalable, cloud-based deployment.
+
+  > Comparing Models' Accuracy and Scores:
+
+   > ![Models_Comparison_Accuracy_Scores](https://github.com/user-attachments/assets/759db816-506a-4167-b336-5fce00748ef6)
+
+
+  > Comparing Models' Accuracy and Inference Time:
+
+   > ![Models_Comparison_Size_Infrence](https://github.com/user-attachments/assets/b06ad065-534f-453d-a2ed-821621f8cfab)
+
+
+
+*Our Kaggle competition score would place us in the **Top 20 teams** from more than 550 teams, confirming the robustness of our approach and pipeline.*
 
 **Training Configuration**:
 
 - **Optimizer**: AdamW
 - **Training Duration**: 3–5 epochs
-- **Loss Function**: Custom loss to address models bias towards a particular class in training.
+- **Loss Function**: Custom loss to address models' bias towards a particular class in training.
   - **Explanation**: We used a Custom loss combining binary cross-entropy and an MSE fairness penalty, which enforces alignment with a target class distribution by penalizing deviation from a predefined ratio of AI-generated predictions, thereby mitigating bias and encouraging balanced predictions.
     - **$Loss_1$**: Standard cross-entropy loss for training sample predictions.
     - **$Loss_2$**: Mean squared error (MSE) loss to enforce a target ratio $\beta$ of predicted class 1 (AI-generated) to class 0 (human-created) samples in the test set.
@@ -135,15 +138,16 @@ While **ConvNeXtTiny** achieved the highest performance, **EfficientNetV2B2** wa
        - $\beta$ is the target proportion of AI-generated images in predictions.
 
 - **Evaluation Metrics**: Accuracy and F1-score
-    > EfficientNetV2B2 Metrics:
-      >![metrics](https://github.com/user-attachments/assets/b135f54c-a50a-4596-81bb-c8d7c497f2ae)
+    > EfficientNetB5-Swin Metrics:
+      >![metrics](https://github.com/user-attachments/assets/f8cde569-8bde-4ddc-8a2a-127028b68d05)
+
  
 
 **Inference Configuration**:
 - **ONNX Conversion**: The best model was converted to ONNX format for optimized deployment and faster inference.
-- **Model Size Optimization**: The model was resized and optimized, reducing its file size to 35 MB.
+- **Model Size Optimization**: The model was resized and optimized, reducing its file size to 115 MB.
 - **Deployment-Ready**: These adjustments ensure efficient resource usage and faster execution in production environments.
-- **Visualizing Some Models Prediction (from validation-set):**
+- **Visualizing Some Models' Prediction (from validation-set):**
 
   >![Visualizing-Predictions](https://github.com/user-attachments/assets/43d7972c-e6ba-4467-869e-7ae8ca65265e)
 
@@ -212,6 +216,6 @@ While **ConvNeXtTiny** achieved the highest performance, **EfficientNetV2B2** wa
 
 This project presents an end-to-end full-stack AI solution to classify AI-generated vs. human-created images using state-of-the-art deep learning models. Our pipeline includes robust data preprocessing and augmentation, training with a custom loss function that addresses model bias, and deployment using AWS services with containerized applications orchestrated via Docker Compose and updated via GitHub Actions.
 
-*🏆 Our placement in the top 75 of more than 550 teams in Kaggle demonstrates that our approach is both robust and applicable in practical settings.*
+*🏆 Our score placement in the top 20 of more than 550 teams in Kaggle demonstrates that our approach is both robust and applicable in practical settings.*
 
 ---
