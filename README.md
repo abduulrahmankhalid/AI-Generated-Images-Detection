@@ -68,10 +68,13 @@
 
 - **Data Splitting**:
 
-  The dataset is split into **90% training** (*about 72,000 Images*) and **10% validation** (*about 8,000 Images*), with the Kaggle competition test set (*about 5500 Images*) used for final testing.
-  > Competition Test Set Samples:
+  - The dataset is split into **90% training** (*about 72,000 Images*) and **10% validation** (*about 8,000 Images*), with the Kaggle competition test set (*about 5500 Images*) used for final testing.
+  - To prevent data leakage, we used `GroupShuffleSplit` during data splitting. Since each human-created image in the dataset had a corresponding AI-generated counterpart, random splitting could easily place related pairs into both training and validation sets. Group-based splitting ensured these pairs remained within the same split, preserving the integrity of our evaluation.
+    
+    > Competition Test Set Samples:
   
     > ![Test-Images](https://github.com/user-attachments/assets/a9ddc0d6-b0b8-429b-bc3e-48361a232ccb)
+    
   
 ### 2️⃣ Model Development & Training
 
