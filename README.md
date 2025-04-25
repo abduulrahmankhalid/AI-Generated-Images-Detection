@@ -4,6 +4,9 @@
 
 ## 📖 Project Report
 ### **[The System is live and accessible here:](http://ai-images-detection.tech/) [![Try the app](https://img.shields.io/badge/Try_the_Live_App-blue?style=for-the-badge)](http://ai-images-detection.tech/)**
+### Demo
+  > https://github.com/user-attachments/assets/63751ffa-70d4-468d-b466-f5e5ac217d42
+
 
 ## 🔍 Introduction
 
